@@ -291,21 +291,33 @@ NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          2m21s
 ```
 
+10.5. Veja que eu posso tambem aproveitar um comando que ja me fornece o `yml` exatamente como eu preciso:
 
+- a opcao `dry-run` apenas simula a criacao do POD
 
+```
+# kubectl run nginx --image=nginx --dry-run=client -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+```
 
+- veja agora:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+# kubectl get pods
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   0          16s
+```
