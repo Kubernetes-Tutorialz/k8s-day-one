@@ -219,6 +219,45 @@ Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists fo
 Events:                      <none>
 ```
 
+10. Agora quero visualizar mais detalhes do POD do nginx, buscando o manifesto (objeto) no formato `yml`:
+
+```
+# kubectl get pods nginx -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2022-01-16T03:49:13Z"
+  labels:
+    run: nginx
+  name: nginx
+  namespace: default
+  resourceVersion: "57326"
+  uid: f20a3403-d519-4a7f-8364-d4d996b2dff2
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Always
+    name: nginx
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-bx8dc
+      readOnly: true
+```
+
+- como ele foi criado para o Kubernetes
+- quando eu quiser criar um POD atraves do `yml` preciso fazer algo assim
+- muita coisa e lixo eu nao preciso
+
+10.1. Criando meu primeiro POD:
+
+```
+# kubectl get pods nginx -o yaml > meu-primeiro-pod.yml
+```
+
+10.2. 
 
 
 
