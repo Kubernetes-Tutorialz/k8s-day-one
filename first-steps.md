@@ -18,9 +18,7 @@ localhost.localdomain   Ready    control-plane,master   10h    v1.23.1
 2. Vamos agora testar o comando `kubectl describe` para ver os detalhes do master:
 
 ```
-]# kubectl describe nodeslocalhost.localdomain
-^C
-[root@localhost ~]# kubectl describe nodes localhost.localdomain
+$ kubectl describe nodes localhost.localdomain
 Name:               localhost.localdomain
 Roles:              control-plane,master
 Labels:             beta.kubernetes.io/arch=amd64
@@ -42,5 +40,26 @@ Lease:
   AcquireTime:     <unset>
   RenewTime:       Sun, 16 Jan 2022 02:50:09 -0300
 ```
+
+3. Agora vamos executar um comando para adicionar novos nodes ao cluster:
+
+```
+# kubeadm token create --print-join-command
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
