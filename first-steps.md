@@ -1,4 +1,4 @@
-## `Primeiros Passos com Kubernetes`
+## `Primeiros passos com Kubernetes`
 
 
 1. Iniciando a aula e vendo que nosso cluster esta funcionando legal
