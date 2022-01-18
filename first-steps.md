@@ -251,13 +251,47 @@ spec:
 - quando eu quiser criar um POD atraves do `yml` preciso fazer algo assim
 - muita coisa e lixo eu nao preciso
 
-10.1. Criando meu primeiro POD:
+10.1. Primeiro vamos redirecionar um POD de teste para que eu tenha um exemplo:
 
 ```
 # kubectl get pods nginx -o yaml > meu-primeiro-pod.yml
 ```
 
-10.2. 
+10.2. Nosso `yml` file modificado:
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+  namespace: amarops
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Always
+    name: nginx
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+```
+
+10.3. Agora sim vamos criar nosso primeiro POD e usar ele no meu namesoace `amarops`:
+
+```
+# kubectl create -f meu-primeiro-pod.yml
+pod/nginx created
+```
+
+10.4. Se eu listar agora meu namespace eu posso ver meu POD:
+
+```
+]# kubectl get pods -n amarops
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   0          2m21s
+```
+
+
 
 
 
