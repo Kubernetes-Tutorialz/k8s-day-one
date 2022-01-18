@@ -101,7 +101,7 @@ Containers:
 - eu posso ter mais de 1 container dentro de um mesmo POD
 - esses containers compartilham  o mesmo IP entre eles
 
-7. Para visualizar todos os namespace ativos:
+7. Para visualizar todos os namespaces dos meus PODS ativos:
 
 ```
 # kubectl get pods --all-namespaces -o wide
@@ -119,6 +119,104 @@ kube-system   kube-scheduler-localhost.localdomain            1/1     Running   
 kube-system   weave-net-dbnw7                                 2/2     Running   2 (90m ago)   42h   192.168.1.210   kube-worker01           <none>           <none>
 kube-system   weave-net-pdq4q                                 2/2     Running   2 (89m ago)   33h   192.168.1.210   kube-worker2            <none>           <none>
 kube-system   weave-net-pkxh8                                 2/2     Running   3 (89m ago)   44h   192.168.1.120   localhost.localdomain   <none>           <none>
+```
+
+8. Para visualizar todos os namespaces que eu tenho criado no meu control-plane:
+
+```
+# kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   44h
+kube-node-lease   Active   44h
+kube-public       Active   44h
+kube-system       Active   44h
+```
+
+8.1.  Vamos agora criar um novo namespace, para isso devemos executar o comando abaixo:
+
+```
+# kubectl create namespace amarops
+namespace/amarops created
+```
+
+- Agora tenho ele listado:
+
+```
+# kubectl get namespaces
+NAME              STATUS   AGE
+amarops           Active   118s
+default           Active   44h
+kube-node-lease   Active   44h
+kube-public       Active   44h
+kube-system       Active   44h
+```
+
+9. Criando agora um novo POD (quando ele executa o comando run ele cria um POD):
+
+```
+$ kubectl run nginx --image=nginx
+```
+
+9.1 Listando meu POD criado:
+
+```
+# kubectl get pods
+NAME    READY   STATUS    RESTARTS      AGE
+nginx   1/1     Running   1 (98m ago)   35h
+```
+
+9.2 Vendo mais detalhes desse POD:
+
+```
+# kubectl describe pods nginx
+Name:         nginx
+Namespace:    default
+Priority:     0
+Node:         kube-worker01/192.168.1.210
+Start Time:   Sun, 16 Jan 2022 00:48:48 -0300
+Labels:       run=nginx
+Annotations:  <none>
+Status:       Running
+IP:           10.44.0.1
+IPs:
+  IP:  10.44.0.1
+Containers:
+  nginx:
+    Container ID:   docker://223d5b1e749a2065a760dd4cc8e71826504e5832b6632d67753f9e23c3673d52
+    Image:          nginx
+    Image ID:       docker-pullable://nginx@sha256:0d17b565c37bcbd895e9d92315a05c1c3c9a29f762b011a10c54a66cd53c9b31
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Mon, 17 Jan 2022 10:53:03 -0300
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    255
+      Started:      Sun, 16 Jan 2022 00:49:14 -0300
+      Finished:     Mon, 17 Jan 2022 10:52:10 -0300
+    Ready:          True
+    Restart Count:  1
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-bx8dc (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-bx8dc:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
 ```
 
 
