@@ -47,6 +47,18 @@ Lease:
 # kubeadm token create --print-join-command
 ```
 
+4. Para ativar o auto-complete em Red Hat based:
+
+```
+$ yum install bash-completion -y ; kubectl completion bash > /etc/bash_completion.d/kubectl
+```
+
+5. Para ativar o auto-complete execute:
+
+```
+$ source <(kubectl completion bash)
+```
+
 
 
 
