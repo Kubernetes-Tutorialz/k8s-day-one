@@ -85,7 +85,23 @@ Session Affinity:  None
 Events:            <none>
 ```
 
+2.4. Agora vou editar meu servico do NGINX para export meu IP para fora do cluster
 
+- ele abre o editor `VIM` e fornece edicao do meu servico
+
+```
+# kubectl edit service nginx
+service/nginx edited
+```
+
+2.5. Agora voce pode verificar que ele mudou o meu tipo de servico para `NodePort`:
+
+```
+# kubectl get service
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP        46h
+nginx        NodePort    10.108.241.165   <none>        80:32110/TCP   5m42s
+```
 
 
 
