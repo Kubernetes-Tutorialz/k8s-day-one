@@ -145,17 +145,9 @@ FIELDS:
      https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 ```
 
+3.1. Vamos deletar nosso servico do `NGINX`:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+# kubectl delete service nginx
+service "nginx" deleted
+```
