@@ -1,7 +1,7 @@
 ## `Primeiros passos com Kubernetes`
 
 
-1. Iniciando a aula e vendo que nosso cluster esta funcionando legal
+1. Iniciando a aula e vendo que nosso cluster esta funcionando legal:
 
 ```
 ]# kubectl get nodes
