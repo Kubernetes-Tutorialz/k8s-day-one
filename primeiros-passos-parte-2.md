@@ -103,6 +103,10 @@ kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP        46h
 nginx        NodePort    10.108.241.165   <none>        80:32110/TCP   5m42s
 ```
 
+- veja que agora eu posso ver meu servico exportado para fora do meu cluster:
+
+![NGINX SERVICE](images/nginx.png)
+
 
 
 
