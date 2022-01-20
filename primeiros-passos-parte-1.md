@@ -98,8 +98,8 @@ Containers:
     Restart Count:  1
 ```
 
-- eu posso ter mais de 1 container dentro de um mesmo POD
-- esses containers compartilham  o mesmo IP entre eles
+- eu posso ter mais de 1 container dentro de um mesmo POD.
+- esses containers compartilham  o mesmo IP entre eles.
 
 7. Para visualizar todos os namespaces dos meus PODS ativos:
 
