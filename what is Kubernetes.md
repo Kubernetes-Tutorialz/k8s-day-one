@@ -6,11 +6,7 @@ O objetivo principal desse repositório, e ajudar as pessoas em torno dos concei
 2. [POD](#POD)
 
 ### Kubernetes
-Vou mostrar aqui o conceito.
+O *Kubernetes* ou *k8s* e um orquestrador de containers baseado no *Borg* usado anteriormente pelo *Google*. Usado para implantacao de aplicacoes conteinerizadas.
 
-### POD
-POD e a menor unidade do Kubernetes, como se fosse um container pro Docker Swarm. Basicamente e uma "caixinha" que armazena os containers.
+Hoje e um dos maiores projetos de codigo aberto do mundo, tornou-se a *API* padrao para construcao de aplicacoes nativas em nuvem e esta presente em quase todos os providers de nuvem publica.
 
-### POD x Containers
-- *POD* - tudo que existe dentro do `POD` e compartilhado, todos os containers que dentro de um unico `POD`, compartilham o mesmo namespace.
-- *Containers*: sasasassaa
