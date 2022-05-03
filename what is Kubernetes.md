@@ -28,7 +28,6 @@ Faz o gerenciamento do *replicaset* e ajuda na parte de atualizacao das novas ve
 #### Services
 Ajuda na parte de acessos dos servicos dentro do container, para se ter acessos atraves de pessoas, ferramentas, precisamos ter um *service* configurado. O *service* gera a possibilidade de ter acesso aos nossos *POD's*.
 
-##### concepts
 - [ ] *selector*: usado para identificar a label com o container (app: front)
 - [ ] *Cluster IP*: funciona como se fosse um IP interno para se comunicar com o container.
 - [ ] *NodePort*:  
