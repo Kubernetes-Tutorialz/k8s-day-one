@@ -12,5 +12,5 @@ Vou mostrar aqui o conceito.
 POD e a menor unidade do Kubernetes, como se fosse um container pro Docker Swarm. Basicamente e uma "caixinha" que armazena os containers.
 
 ### POD x Containers
-- *POD* - tudo que existe dentro do *POD* e compartilhado, todos os containers que dentro de um unico POD, compartilham o mesmo namespace.
-- Containers: sasasas
+- *POD* - tudo que existe dentro do `POD` e compartilhado, todos os containers que dentro de um unico `POD`, compartilham o mesmo namespace.
+- *Containers*: sasasassaa
