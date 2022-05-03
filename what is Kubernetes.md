@@ -1,11 +1,11 @@
-# Table of Contents
+## Table of Contents
 - [Table of Contents](#table-of-contents)
-  - [Kubernetes](#kubernetes)
-  - [Componentes Kubernetes](#componentes-kubernetes)
-    - [POD](#pod)
-    - [Replicaset](#replicaset)
-    - [Deployment](#deployment)
-    - [Services](#services)
+- [Kubernetes](#kubernetes)
+- [Componentes Kubernetes](#componentes-kubernetes)
+  - [POD](#pod)
+  - [Replicaset](#replicaset)
+  - [Deployment](#deployment)
+  - [Services](#services)
 ## Kubernetes
 O *Kubernetes* ou *k8s* e um orquestrador de containers baseado no *Borg* usado anteriormente pelo *Google*. Usado para implantacao de aplicacoes conteinerizadas. Hoje e um dos maiores projetos de codigo aberto do mundo, tornou-se a *API* padrao para construcao de aplicacoes nativas em nuvem e esta presente em quase todos os provedores de nuvem publica.
 
