@@ -145,16 +145,16 @@ Name:                 weave-net-cqvn8
 Namespace:            kube-system
 Priority:             2000001000
 Priority Class Name:  system-node-critical
-Node:                 k8snode01/192.168.0.218
+Node:                 k8snode01/192.168.0.220
 Start Time:           Sun, 27 Feb 2022 14:49:49 -0300
 Labels:               controller-revision-hash=59d968cb54
                       name=weave-net
                       pod-template-generation=1
 Annotations:          <none>
 Status:               Running
-IP:                   192.168.0.218
+IP:                   192.168.0.220
 IPs:
-  IP:           192.168.0.218
+  IP:           192.168.0.220
 Controlled By:  DaemonSet/weave-net
 Init Containers:
   weave-init:
@@ -195,21 +195,39 @@ Containers:
 7. Para visualizar todos os namespaces dos meus PODS ativos:
 
 ```bash
+]# kubectl get pods --all-namespaces
+NAMESPACE     NAME                                READY   STATUS    RESTARTS       AGE
+kube-system   coredns-64897985d-dkmwn             1/1     Running   1 (3d1h ago)   6d4h
+kube-system   coredns-64897985d-sj8s8             1/1     Running   1 (3d1h ago)   6d4h
+kube-system   etcd-k8smaster                      1/1     Running   1 (3d1h ago)   6d4h
+kube-system   kube-apiserver-k8smaster            1/1     Running   1 (3d1h ago)   6d4h
+kube-system   kube-controller-manager-k8smaster   1/1     Running   1 (3d1h ago)   6d4h
+kube-system   kube-proxy-5c7lt                    1/1     Running   1 (3d1h ago)   6d3h
+kube-system   kube-proxy-7cmng                    1/1     Running   1 (3d1h ago)   6d4h
+kube-system   kube-proxy-clgln                    1/1     Running   1 (3d1h ago)   6d4h
+kube-system   kube-scheduler-k8smaster            1/1     Running   1 (3d1h ago)   6d4h
+kube-system   weave-net-bkc5w                     2/2     Running   3 (3d1h ago)   6d4h
+kube-system   weave-net-cqvn8                     2/2     Running   2 (3d1h ago)   6d4h
+kube-system   weave-net-tfskb                     2/2     Running   2 (3d1h ago)   6d3h
+```
+
+- Para visualizar todos os namespaces dos meus PODS ativos:
+
+```bash
 # kubectl get pods --all-namespaces -o wide
-NAMESPACE     NAME                                            READY   STATUS    RESTARTS      AGE   IP              NODE                    NOMINATED NODE   READINESS GATES
-default       nginx                                           1/1     Running   1 (90m ago)   35h   10.44.0.1       kube-worker01           <none>           <none>
-kube-system   coredns-64897985d-7wkj2                         1/1     Running   1 (90m ago)   44h   10.32.0.2       localhost.localdomain   <none>           <none>
-kube-system   coredns-64897985d-p2z9f                         1/1     Running   1 (90m ago)   44h   10.32.0.3       localhost.localdomain   <none>           <none>
-kube-system   etcd-localhost.localdomain                      1/1     Running   1 (90m ago)   44h   192.168.0.120   localhost.localdomain   <none>           <none>
-kube-system   kube-apiserver-localhost.localdomain            1/1     Running   1 (90m ago)   44h   192.168.1.120   localhost.localdomain   <none>           <none>
-kube-system   kube-controller-manager-localhost.localdomain   1/1     Running   1 (90m ago)   44h   192.168.1.120   localhost.localdomain   <none>           <none>
-kube-system   kube-proxy-69h5f                                1/1     Running   1 (90m ago)   42h   192.168.1.210   kube-worker01           <none>           <none>
-kube-system   kube-proxy-6p9vx                                1/1     Running   1 (89m ago)   33h   192.168.1.210   kube-worker2            <none>           <none>
-kube-system   kube-proxy-dcxhd                                1/1     Running   1 (90m ago)   44h   192.168.1.120   localhost.localdomain   <none>           <none>
-kube-system   kube-scheduler-localhost.localdomain            1/1     Running   1 (90m ago)   44h   192.168.1.120   localhost.localdomain   <none>           <none>
-kube-system   weave-net-dbnw7                                 2/2     Running   2 (90m ago)   42h   192.168.1.210   kube-worker01           <none>           <none>
-kube-system   weave-net-pdq4q                                 2/2     Running   2 (89m ago)   33h   192.168.1.210   kube-worker2            <none>           <none>
-kube-system   weave-net-pkxh8                                 2/2     Running   3 (89m ago)   44h   192.168.1.120   localhost.localdomain   <none>           <none>
+NAMESPACE     NAME                                READY   STATUS    RESTARTS       AGE    IP              NODE        NOMINATED NODE   READINESS GATES
+kube-system   coredns-64897985d-dkmwn             1/1     Running   1 (3d1h ago)   6d4h   10.32.0.3       k8smaster   <none>           <none>
+kube-system   coredns-64897985d-sj8s8             1/1     Running   1 (3d1h ago)   6d4h   10.32.0.2       k8smaster   <none>           <none>
+kube-system   etcd-k8smaster                      1/1     Running   1 (3d1h ago)   6d4h   192.168.0.235   k8smaster   <none>           <none>
+kube-system   kube-apiserver-k8smaster            1/1     Running   1 (3d1h ago)   6d4h   192.168.0.235   k8smaster   <none>           <none>
+kube-system   kube-controller-manager-k8smaster   1/1     Running   1 (3d1h ago)   6d4h   192.168.0.235   k8smaster   <none>           <none>
+kube-system   kube-proxy-5c7lt                    1/1     Running   1 (3d1h ago)   6d3h   192.168.0.136   k8snode02   <none>           <none>
+kube-system   kube-proxy-7cmng                    1/1     Running   1 (3d1h ago)   6d4h   192.168.0.235   k8smaster   <none>           <none>
+kube-system   kube-proxy-clgln                    1/1     Running   1 (3d1h ago)   6d4h   192.168.0.217   k8snode01   <none>           <none>
+kube-system   kube-scheduler-k8smaster            1/1     Running   1 (3d1h ago)   6d4h   192.168.0.235   k8smaster   <none>           <none>
+kube-system   weave-net-bkc5w                     2/2     Running   3 (3d1h ago)   6d4h   192.168.0.235   k8smaster   <none>           <none>
+kube-system   weave-net-cqvn8                     2/2     Running   2 (3d1h ago)   6d4h   192.168.0.215   k8snode01   <none>           <none>
+kube-system   weave-net-tfskb                     2/2     Running   2 (3d1h ago)   6d3h   192.168.0.135   k8snode02   <none>           <none>
 ```
 
 8. Para visualizar todos os namespaces que eu tenho criado no meu control-plane:
