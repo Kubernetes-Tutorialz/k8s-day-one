@@ -230,7 +230,7 @@ kube-system   weave-net-cqvn8                     2/2     Running   2 (3d1h ago)
 kube-system   weave-net-tfskb                     2/2     Running   2 (3d1h ago)   6d3h   192.168.0.135   k8snode02   <none>           <none>
 ```
 
-8. Para visualizar todos os namespaces que eu tenho criado no meu control-plane:
+8. Para visualizar todos os namespaces que eu tenho criado no meu control-plane, cluster:
 
 ```bash
 # kubectl get namespaces
@@ -241,11 +241,14 @@ kube-public       Active   44h
 kube-system       Active   44h
 ```
 
-8.1.  Vamos agora criar um novo namespace, para isso devemos executar o comando abaixo:
+#### Concepts
+- esses `namespaces` sao padroes do Kubernetes.
+
+8.1.  Vamos agora criar um novo *namespace*, para isso devemos executar o comando abaixo:
 
 ```bash
-# kubectl create namespace amarops
-namespace/amarops created
+# kubectl create namespace devops
+namespace/devops created
 ```
 
 - Agora tenho ele listado:
@@ -260,13 +263,14 @@ kube-public       Active   44h
 kube-system       Active   44h
 ```
 
-9. Criando agora um novo POD (quando ele executa o comando run ele cria um POD):
+9. Criando agora um novo *POD* (quando ele executa o comando run ele cria um POD):
 
 ```bash
-$ kubectl run nginx --image=nginx
+# kubectl run nginx --image=nginx
+pod/nginx created
 ```
 
-9.1 Listando meu POD criado:
+9.1 Listando meu *POD* criado:
 
 ```bash
 # kubectl get pods
@@ -274,7 +278,15 @@ NAME    READY   STATUS    RESTARTS      AGE
 nginx   1/1     Running   1 (98m ago)   35h
 ```
 
-9.2 Vendo mais detalhes desse POD:
+9.2 Vendo mais detalhes desse *POD*:
+
+```bash
+# kubectl get pods nginx  -o wide
+NAME    READY   STATUS    RESTARTS   AGE    IP          NODE        NOMINATED NODE   READINESS GATES
+nginx   1/1     Running   0          100s   10.44.0.2   k8snode01   <none>           <none>
+```
+
+9.3 Mais detalhes do *POD*:
 
 ```bash
 # kubectl describe pods nginx
@@ -328,20 +340,22 @@ Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists fo
 Events:                      <none>
 ```
 
-10. Agora quero visualizar mais detalhes do POD do nginx, buscando o manifesto (objeto) no formato `yml`:
+10. Agora quero visualizar mais detalhes do *POD* do nginx, buscando o manifesto (objeto YML) no formato `yml`:
+
+- esse *POD* vem com mais sujeiras do k8s (podemos remover algumas linhas).
 
 ```bash
 # kubectl get pods nginx -o yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: "2022-01-16T03:49:13Z"
+  creationTimestamp: "2022-03-05T20:22:00Z"
   labels:
     run: nginx
   name: nginx
   namespace: default
-  resourceVersion: "57326"
-  uid: f20a3403-d519-4a7f-8364-d4d996b2dff2
+  resourceVersion: "372146"
+  uid: 4f255e36-4725-4e0e-82f1-4f34235d8e5d
 spec:
   containers:
   - image: nginx
@@ -352,8 +366,84 @@ spec:
     terminationMessagePolicy: File
     volumeMounts:
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: kube-api-access-bx8dc
+      name: kube-api-access-mfq45
       readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: k8snode01
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-mfq45
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-03-05T06:39:08Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-03-05T06:39:13Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-03-05T06:39:13Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-03-05T20:22:00Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://87a580be57bb0ea333fe860eb1ef480a70acede42cf3b1e8a0065fcc2582aee2
+    image: nginx:latest
+    imageID: docker-pullable://nginx@sha256:859ab6768a6f26a79bc42b231664111317d095a4f04e4b6fe79ce37b3d199097
+    lastState: {}
+    name: nginx
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-03-05T06:39:12Z"
+  hostIP: 192.168.0.220
+  phase: Running
+  podIP: 10.44.0.2
+  podIPs:
+  - ip: 10.44.0.2
+  qosClass: BestEffort
+  startTime: "2022-03-05T06:39:08Z"
 ```
 
 - como ele foi criado para o Kubernetes
@@ -363,7 +453,7 @@ spec:
 10.1. Primeiro vamos redirecionar um POD de teste para que eu tenha um exemplo:
 
 ```bash
-# kubectl get pods nginx -o yaml > meu-primeiro-pod.yml
+# kubectl get pods nginx -o yaml >> meu_primeiro_pod_nginx.yml
 ```
 
 10.2. Nosso `yml` file modificado:
@@ -385,17 +475,58 @@ spec:
   restartPolicy: Always
 ```
 
-10.3. Agora sim vamos criar nosso primeiro POD e usar ele no meu namesoace `amarops`:
+10.3. Agora sim vamos criar nosso primeiro POD e usar ele no meu namesoace `devops`:
 
 ```bash
-# kubectl create -f meu-primeiro-pod.yml
+# kubectl apply -f primeiro_pod_nginx.yml
 pod/nginx created
 ```
 
-10.4. Se eu listar agora meu namespace eu posso ver meu POD:
+10.3.a. Eu tambem posso remover/deletar esse *POD*:
 
 ```bash
-]# kubectl get pods -n amarops
+# kubectl delete -f primeiro_pod_nginx.yml
+pod "nginx" deleted
+```
+10.3.b. Tambem posso simular uma criacao de *POD* ja com o `YML`:
+
+```bash
+# kubectl run nginx --image=nginx --dry-run=client
+pod/nginx created (dry run)
+```
+
+10.3.c. Ele vem com o `YML`enxuto:
+
+```bash
+# kubectl run nginx --image=nginx --dry-run=client -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+```
+
+- Posso dar `apply`:
+
+```bash
+# kubectl apply -f segundo_pod_nginx.yml
+pod/nginx created
+```
+
+10.4. Se eu listar agora meu *namespace* eu posso ver meu *POD*:
+
+```bash
+]# kubectl get pods -n devops
 NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          2m21s
 ```
