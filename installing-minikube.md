@@ -14,7 +14,7 @@ root@inspiron-5566:~# minikube delete
 💀  Removed all traces of the "minikube" cluster.
 ```
 
-2-  Agora vamos partir para a instalacao:
+2-  Agora vamos partir para a instalacao do *[Minikube]*(https://minikube.sigs.k8s.io/docs/start/)
 
 ```bash
 # minikube start
