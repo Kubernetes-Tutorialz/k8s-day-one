@@ -74,6 +74,30 @@ $ source <(kubectl completion bash)
 6. Vamos agora descrever um POD:
 
 ```bash
+# kubectl get pods -n kube-system
+NAME                                READY   STATUS    RESTARTS       AGE
+coredns-64897985d-dkmwn             1/1     Running   1 (3d1h ago)   6d4h
+coredns-64897985d-sj8s8             1/1     Running   1 (3d1h ago)   6d4h
+etcd-k8smaster                      1/1     Running   1 (3d1h ago)   6d4h
+kube-apiserver-k8smaster            1/1     Running   1 (3d1h ago)   6d4h
+kube-controller-manager-k8smaster   1/1     Running   1 (3d1h ago)   6d4h
+kube-proxy-5c7lt                    1/1     Running   1 (3d1h ago)   6d3h
+kube-proxy-7cmng                    1/1     Running   1 (3d1h ago)   6d4h
+kube-proxy-clgln                    1/1     Running   1 (3d1h ago)   6d3h
+kube-scheduler-k8smaster            1/1     Running   1 (3d1h ago)   6d4h
+weave-net-bkc5w                     2/2     Running   3 (3d1h ago)   6d4h
+weave-net-cqvn8                     2/2     Running   2 (3d1h ago)   6d3h
+weave-net-tfskb                     2/2     Running   2 (3d1h ago)   6d3h
+```
+
+#### Concepts
+- um POD por ter mais de um container veja o caso acima do `weave-net-bkc5w`.
+  - esses containers compartlha o mesmo IP, nome, mesmo namespace.
+  - `namespace`: funciona como um cercado, voce tem maior controle da sua app.
+  
+Aqui agora descrevendo os POD's do Kube-System:
+
+```bash
 # kubectl describe pods -n kube-system
 Name:                 coredns-64897985d-7wkj2
 Namespace:            kube-system
@@ -112,6 +136,61 @@ Containers:
 
 - eu posso ter mais de 1 container dentro de um mesmo POD.
 - esses containers compartilham  o mesmo IP entre eles.
+
+Mais detalhes do POD `weave-net-cqvn8`:
+
+```bash
+# kubectl describe pods -n kube-system weave-net-cqvn8
+Name:                 weave-net-cqvn8
+Namespace:            kube-system
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Node:                 k8snode01/192.168.0.218
+Start Time:           Sun, 27 Feb 2022 14:49:49 -0300
+Labels:               controller-revision-hash=59d968cb54
+                      name=weave-net
+                      pod-template-generation=1
+Annotations:          <none>
+Status:               Running
+IP:                   192.168.0.218
+IPs:
+  IP:           192.168.0.218
+Controlled By:  DaemonSet/weave-net
+Init Containers:
+  weave-init:
+    Container ID:  docker://01cfc8b8e6e4041c75ce9f7ad43426705ab4bd053f354f96f824eedf7aee5c93
+    Image:         ghcr.io/weaveworks/launcher/weave-kube:2.8.1
+    Image ID:      docker-pullable://ghcr.io/weaveworks/launcher/weave-kube@sha256:d797338e7beb17222e10757b71400d8471bdbd9be13b5da38ce2ebf597fb4e63
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /home/weave/init.sh
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Wed, 02 Mar 2022 15:19:14 -0300
+      Finished:     Wed, 02 Mar 2022 15:19:17 -0300
+    Ready:          True
+    Restart Count:  1
+    Environment:    <none>
+    Mounts:
+      /host/etc from cni-conf (rw)
+      /host/home from cni-bin2 (rw)
+      /host/opt from cni-bin (rw)
+      /lib/modules from lib-modules (rw)
+      /run/xtables.lock from xtables-lock (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-bs7dw (ro)
+Containers:
+  weave:
+    Container ID:  docker://d591211f201a4412a76670a158d64b5ee1807ee47e9bb011ef0aa3a99550e86e
+    Image:         ghcr.io/weaveworks/launcher/weave-kube:2.8.1
+    Image ID:      docker-pullable://ghcr.io/weaveworks/launcher/weave-kube@sha256:d797338e7beb17222e10757b71400d8471bdbd9be13b5da38ce2ebf597fb4e63
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /home/weave/launch.sh
+```
+
 
 7. Para visualizar todos os namespaces dos meus PODS ativos:
 
