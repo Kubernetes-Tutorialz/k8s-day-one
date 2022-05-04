@@ -82,3 +82,20 @@ Principais comandos do Minikube para que voce possa comecar do seu lado:
 # minikube dashboard
 # minikube logs
 ```
+
+## Minikube in action
+
+1-  Listando os nodes do cluster de k8s:
+
+```bash
+$ kubectl get nodes
+NAME       STATUS   ROLES                  AGE   VERSION
+minikube   Ready    control-plane,master   27m   v1.22.3
+```
+
+2-  Listando os POD's:
+
+```bash
+$ kubectl get pods
+No resources found in default namespace.
+```
