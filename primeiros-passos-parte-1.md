@@ -18,13 +18,13 @@ localhost.localdomain   Ready    control-plane,master   10h    v1.23.1
 2. Vamos agora testar o comando `kubectl describe` para ver os detalhes do master:
 
 ```bash
-# kubectl describe nodes localhost.localdomain
-Name:               localhost.localdomain
+# kubectl describe nodes k8smaster
+Name:               k8smaster
 Roles:              control-plane,master
 Labels:             beta.kubernetes.io/arch=amd64
                     beta.kubernetes.io/os=linux
                     kubernetes.io/arch=amd64
-                    kubernetes.io/hostname=localhost.localdomain
+                    kubernetes.io/hostname=k8smaster
                     kubernetes.io/os=linux
                     node-role.kubernetes.io/control-plane=
                     node-role.kubernetes.io/master=
@@ -32,13 +32,22 @@ Labels:             beta.kubernetes.io/arch=amd64
 Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: /var/run/dockershim.sock
                     node.alpha.kubernetes.io/ttl: 0
                     volumes.kubernetes.io/controller-managed-attach-detach: true
-CreationTimestamp:  Sat, 15 Jan 2022 16:15:18 -0300
+CreationTimestamp:  Sun, 27 Feb 2022 12:32:58 -0300
 Taints:             node-role.kubernetes.io/master:NoSchedule
 Unschedulable:      false
 Lease:
-  HolderIdentity:  localhost.localdomain
+  HolderIdentity:  k8smaster
   AcquireTime:     <unset>
-  RenewTime:       Sun, 16 Jan 2022 02:50:09 -0300
+  RenewTime:       Sat, 05 Mar 2022 14:02:00 -0300
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Wed, 02 Mar 2022 15:19:09 -0300   Wed, 02 Mar 2022 15:19:09 -0300   WeaveIsUp                    Weave pod has set this
+  MemoryPressure       False   Sat, 05 Mar 2022 13:57:52 -0300   Sun, 27 Feb 2022 12:32:54 -0300   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Sat, 05 Mar 2022 13:57:52 -0300   Sun, 27 Feb 2022 12:32:54 -0300   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Sat, 05 Mar 2022 13:57:52 -0300   Sun, 27 Feb 2022 12:32:54 -0300   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Sat, 05 Mar 2022 13:57:52 -0300   Sun, 27 Feb 2022 12:40:03 -0300   KubeletReady                 kubelet is posting ready status
+Addresses:
 ```
 
 3. Agora vamos executar um comando para adicionar novos nodes ao cluster:
