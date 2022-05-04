@@ -1,24 +1,24 @@
-## `Primeiros passos com Kubernetes`
+## Primeiros passos com Kubernetes
 
 
 1. Iniciando a aula e vendo que nosso cluster esta funcionando legal:
 
-```
-]# kubectl get nodes
+```bash
+# kubectl get nodes
 NAME                    STATUS   ROLES                  AGE    VERSION
 kube-worker01           Ready    <none>                 9h     v1.23.1
 kube-worker2            Ready    <none>                 114s   v1.23.1
 localhost.localdomain   Ready    control-plane,master   10h    v1.23.1
 ```
 
-- no Kubernetes temos nodes **worker** e nodes **master**
+- no Kubernetes temos nodes worker e nodes master
 - no master vai ter o APIserver, gerencia do meu cluster, se on nodes, estap saudaveis, conversar com o etcd
 - por default ele nao recebe containers, somente nos workers
 
 2. Vamos agora testar o comando `kubectl describe` para ver os detalhes do master:
 
-```
-$ kubectl describe nodes localhost.localdomain
+```bash
+# kubectl describe nodes localhost.localdomain
 Name:               localhost.localdomain
 Roles:              control-plane,master
 Labels:             beta.kubernetes.io/arch=amd64
@@ -43,25 +43,32 @@ Lease:
 
 3. Agora vamos executar um comando para adicionar novos nodes ao cluster:
 
-```
+```bash
 # kubeadm token create --print-join-command
 ```
 
-4. Para ativar o auto-complete em Red Hat based:
+3.1. Comando para adicionar novos nodes ao cluster:
 
+```bash
+# kubeadm token create --print-join-command
+kubeadm join 192.168.0.234:6443 --token j7ivmo.up6haifmk55pou7c --discovery-token-ca-cert-hash sha256:3fc69efd6451dedb945ce665bdf436ac3e54e0e55774fb0654b60562677944f7
 ```
+
+4. Para ativar o auto-complete Red Hat based:
+
+```bash
 $ yum install bash-completion -y ; kubectl completion bash > /etc/bash_completion.d/kubectl
 ```
 
 5. Para ativar o auto-complete execute:
 
-```
+```bash
 $ source <(kubectl completion bash)
 ```
 
 6. Vamos agora descrever um POD:
 
-```
+```bash
 # kubectl describe pods -n kube-system
 Name:                 coredns-64897985d-7wkj2
 Namespace:            kube-system
@@ -103,7 +110,7 @@ Containers:
 
 7. Para visualizar todos os namespaces dos meus PODS ativos:
 
-```
+```bash
 # kubectl get pods --all-namespaces -o wide
 NAMESPACE     NAME                                            READY   STATUS    RESTARTS      AGE   IP              NODE                    NOMINATED NODE   READINESS GATES
 default       nginx                                           1/1     Running   1 (90m ago)   35h   10.44.0.1       kube-worker01           <none>           <none>
@@ -123,7 +130,7 @@ kube-system   weave-net-pkxh8                                 2/2     Running   
 
 8. Para visualizar todos os namespaces que eu tenho criado no meu control-plane:
 
-```
+```bash
 # kubectl get namespaces
 NAME              STATUS   AGE
 default           Active   44h
@@ -134,14 +141,14 @@ kube-system       Active   44h
 
 8.1.  Vamos agora criar um novo namespace, para isso devemos executar o comando abaixo:
 
-```
+```bash
 # kubectl create namespace amarops
 namespace/amarops created
 ```
 
 - Agora tenho ele listado:
 
-```
+```bash
 # kubectl get namespaces
 NAME              STATUS   AGE
 amarops           Active   118s
@@ -153,13 +160,13 @@ kube-system       Active   44h
 
 9. Criando agora um novo POD (quando ele executa o comando run ele cria um POD):
 
-```
+```bash
 $ kubectl run nginx --image=nginx
 ```
 
 9.1 Listando meu POD criado:
 
-```
+```bash
 # kubectl get pods
 NAME    READY   STATUS    RESTARTS      AGE
 nginx   1/1     Running   1 (98m ago)   35h
@@ -167,7 +174,7 @@ nginx   1/1     Running   1 (98m ago)   35h
 
 9.2 Vendo mais detalhes desse POD:
 
-```
+```bash
 # kubectl describe pods nginx
 Name:         nginx
 Namespace:    default
@@ -221,7 +228,7 @@ Events:                      <none>
 
 10. Agora quero visualizar mais detalhes do POD do nginx, buscando o manifesto (objeto) no formato `yml`:
 
-```
+```bash
 # kubectl get pods nginx -o yaml
 apiVersion: v1
 kind: Pod
@@ -253,13 +260,13 @@ spec:
 
 10.1. Primeiro vamos redirecionar um POD de teste para que eu tenha um exemplo:
 
-```
+```bash
 # kubectl get pods nginx -o yaml > meu-primeiro-pod.yml
 ```
 
 10.2. Nosso `yml` file modificado:
 
-```
+```bash
 apiVersion: v1
 kind: Pod
 metadata:
@@ -278,14 +285,14 @@ spec:
 
 10.3. Agora sim vamos criar nosso primeiro POD e usar ele no meu namesoace `amarops`:
 
-```
+```bash
 # kubectl create -f meu-primeiro-pod.yml
 pod/nginx created
 ```
 
 10.4. Se eu listar agora meu namespace eu posso ver meu POD:
 
-```
+```bash
 ]# kubectl get pods -n amarops
 NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          2m21s
@@ -295,7 +302,7 @@ nginx   1/1     Running   0          2m21s
 
 - a opcao `dry-run` apenas simula a criacao do POD
 
-```
+```bash
 # kubectl run nginx --image=nginx --dry-run=client -o yaml
 apiVersion: v1
 kind: Pod
@@ -316,7 +323,7 @@ status: {}
 
 - veja agora:
 
-```
+```bash
 # kubectl get pods
 NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          16s
