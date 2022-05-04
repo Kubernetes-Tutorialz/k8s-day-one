@@ -45,13 +45,7 @@ Lease:
 
 ```bash
 # kubeadm token create --print-join-command
-```
-
-3.1. Comando para adicionar novos nodes ao cluster:
-
-```bash
-# kubeadm token create --print-join-command
-kubeadm join 192.168.0.234:6443 --token j7ivmo.up6haifmk55pou7c --discovery-token-ca-cert-hash sha256:3fc69efd6451dedb945ce665bdf436ac3e54e0e55774fb0654b60562677944f7
+kubeadm join 192.168.1.114:6434 --token j7ivmo.up6haifmk55pou7c --discovery-token-ca-cert-hash sha256:3fc69efd6451dedb945ce665bdf436ac3e54e0e55774fb0654b60562677944f7
 ```
 
 4. Para ativar o auto-complete Red Hat based:
