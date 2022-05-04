@@ -1,5 +1,12 @@
-## Minikube
+# Minikube
 E um aplicativo usado para teste onde voce pode simular um cluster de Kubernetes. Se voce e uma pessoa desenvolvedor de software ou DevOps Engineer existe essa ferramenta para voce instalar localmente na sua maquineta e comecar a brincar com k8s. Sempre usar Minikube como ambiente de desenvolvimento apenas para testes.
+
+## Requeriments
+- 2 CPUs or more
+- 2GB of free memory
+- 20GB of free disk space
+- Internet connection
+- Container or virtual machine manager
 
 ## Install Minikube
 1-  Primeiro preciso remover as instalacoes antigas se existir:
@@ -60,4 +67,18 @@ $ minikube start
 🔎  Verifying Kubernetes components...
 🌟  Enabled addons: storage-provisioner, default-storageclass
 🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+```
+
+## Minikube Commands
+Principais comandos do Minikube para que voce possa comecar do seu lado:
+
+```bash
+# minikube start
+# kubectl get nodes
+# minikube ip
+# minikube ssh 
+# minikube start
+# minikube stop
+# minikube dashboard
+# minikube logs
 ```
