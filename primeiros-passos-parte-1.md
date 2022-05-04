@@ -10,10 +10,12 @@ kube-worker01           Ready    <none>                 9h     v1.23.1
 kube-worker2            Ready    <none>                 114s   v1.23.1
 localhost.localdomain   Ready    control-plane,master   10h    v1.23.1
 ```
+### Concepts
 
-- no Kubernetes temos nodes worker e nodes master
-- no master vai ter o APIserver, gerencia do meu cluster, se on nodes, estap saudaveis, conversar com o etcd
-- por default ele nao recebe containers, somente nos workers
+- no Kubernetes temos nodes *worker* e nodes *master*.
+- no master vai ter o APIserver, gerencia do meu cluster.
+  - se os nodes etstao saudaveis, se ele esta comunicando com o *master*.
+- por default o *master* nao recebe containers, somente nos *workers*.
 
 2. Vamos agora testar o comando `kubectl describe` para ver os detalhes do master:
 
