@@ -147,5 +147,42 @@ Commercial support is available at nginx.com.
 Thank you for using nginx.
 ```
 
+11. Pegando o `YML` do meu *service*:
+
+`# kubectl get service nginx -o yaml`
+
+```yml
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2022-03-06T01:49:05Z"
+  labels:
+    run: nginx
+  name: nginx
+  namespace: default
+  resourceVersion: "400096"
+  uid: 040663fa-43be-4335-8517-95f70e9459e0
+spec:
+  clusterIP: 10.106.174.205
+  clusterIPs:
+  - 10.106.174.205
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 30654
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: nginx
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
+```
+
 
 
