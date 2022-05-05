@@ -67,7 +67,7 @@ nginx        ClusterIP   10.106.174.205   <none>        80/TCP    14s
 
 7.  Testando  usando o comando `curl`:
 
-```bash
+```html
 # curl 10.106.174.205
 <!DOCTYPE html>
 <html>
