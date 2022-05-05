@@ -344,7 +344,7 @@ Events:                      <none>
 
 - esse *POD* vem com mais sujeiras do k8s (podemos remover algumas linhas).
 
-```bash
+```yml
 # kubectl get pods nginx -o yaml
 apiVersion: v1
 kind: Pod
@@ -458,7 +458,7 @@ status:
 
 10.2. Nosso `yml` file modificado:
 
-```bash
+```yml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -497,7 +497,7 @@ pod/nginx created (dry run)
 
 10.3.c. Ele vem com o `YML`enxuto:
 
-```bash
+```yml
 # kubectl run nginx --image=nginx --dry-run=client -o yaml
 apiVersion: v1
 kind: Pod
@@ -535,7 +535,7 @@ nginx   1/1     Running   0          2m21s
 
 - a opcao `dry-run` apenas simula a criacao do POD
 
-```bash
+```yml
 # kubectl run nginx --image=nginx --dry-run=client -o yaml
 apiVersion: v1
 kind: Pod
