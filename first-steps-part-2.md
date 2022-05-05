@@ -181,7 +181,7 @@ spec:
   sessionAffinity: None
   type: NodePort
 status:
-  loadBalancer: {}
+  loadBalancer: {}  
 ```
 
 
