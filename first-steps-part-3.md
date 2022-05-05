@@ -38,3 +38,45 @@ FIELDS:
      https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 ```
 
+2.  Tambem podemos executar muitos comandos ao mesmo tempo:
+
+```bash
+# kubectl get pods,services,endpoints
+NAME        READY   STATUS    RESTARTS   AGE
+pod/nginx   1/1     Running   0          113m
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP        6d12h
+service/nginx        NodePort    10.106.174.205   <none>        80:30654/TCP   112m
+
+NAME                   ENDPOINTS            AGE
+endpoints/kubernetes   192.168.0.234:6443   6d12h
+endpoints/nginx        10.44.0.1:80         112m
+```
+
+3.  Podemos usar abreviacoes de comandos:
+
+```bash
+# kubectl get po
+No resources found in default namespace.
+```
+
+tambem:
+
+```bash
+# kubectl get ns
+NAME              STATUS   AGE
+default           Active   6d12h
+devops            Active   7h23m
+kube-node-lease   Active   6d12h
+kube-public       Active   6d12h
+kube-system       Active   6d12h
+```
+
+tambem:
+
+```bash
+# kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   6d12h
+```
