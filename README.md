@@ -1,4 +1,4 @@
-## Trilha Kubernetes (Parte 1): Aprenda os principais componentes do cluster do K8s
+## Kubernetes: Aprenda os principais componentes do cluster do K8s
 
 Voltando com TUDO pessoal, hoje vamos de Kubernetes, e se tem uma parte que é MUITO importante de se entender são os componentes do forma o cluster do kubernetes e resolvi trazer aqui hoje para vocês o meu entendimento baseado na documentação da ferramenta. A ideia é bem simples, basicamente vou discorrer sobre os principais componentes que fazem parte do cluster do Kubernetes.
 
