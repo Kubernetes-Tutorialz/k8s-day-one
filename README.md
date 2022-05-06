@@ -2,7 +2,7 @@
 
 ## Indice
 
-1.  [Diagrama do Cluster K8S](#diagrama-cluster-k8s)
+1.  [Diagrama Cluster K8S](#diagrama-cluster-k8s)
 2.  sasasa
 3.  asasasa
 4.  asasas
